@@ -1,6 +1,6 @@
 ﻿namespace API_Top_Car.Models
 {
-    public class Clientes
+    public class ClientesModel
     {
         public int CPF { get; set; }
         public int NumeroCasa { get; set; }

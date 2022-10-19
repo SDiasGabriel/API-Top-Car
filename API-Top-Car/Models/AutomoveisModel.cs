@@ -1,6 +1,6 @@
 ﻿namespace API_Top_Car.Models
 {
-    public class Automoveis
+    public class AutomoveisModel
     {
         public string MarcaVeiculos { get; set; }
         public int AnoFabricacao { get; set; }
