@@ -2,6 +2,7 @@
 {
     public class AutomoveisModel
     {
+        public int IdVeiculo { get; set; }
         public string MarcaVeiculos { get; set; }
         public int AnoFabricacao { get; set; }
         public string ModeloVeiculo { get; set; }

@@ -2,6 +2,7 @@
 {
     public class ClientesModel
     {
+        public int IdClientes { get; set; }
         public int CPF { get; set; }
         public int NumeroCasa { get; set; }
         public int Idade { get; set; }
