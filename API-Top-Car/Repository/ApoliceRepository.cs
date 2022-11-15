@@ -34,7 +34,7 @@ namespace API_Top_Car.Repository
 
             if(apolicePorId == null)
             {
-                throw new Exception($"Usuario para ID: {idApolice} Não foi encontrado no Banco de Dados");
+                throw new Exception($"Apolice ID: {idApolice} Não foi encontrado no Banco de Dados");
             }
             apolicePorId.DescricaoContrato = apolice.DescricaoContrato;
             apolicePorId.CPFCliente = apolice.CPFCliente;
@@ -51,7 +51,7 @@ namespace API_Top_Car.Repository
 
             if (apolicePorId == null)
             {
-                throw new Exception($"Usuario para ID: {idApolice} Não foi encontrado no Banco de Dados");
+                throw new Exception($"Apolice ID: {idApolice} Não foi encontrado no Banco de Dados");
             }
 
             _dbContex.Apolices.Remove(apolicePorId);

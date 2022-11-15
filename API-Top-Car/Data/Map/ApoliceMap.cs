@@ -8,7 +8,9 @@ namespace API_Top_Car.Data.Map
     {
         public void Configure(EntityTypeBuilder<ApoliceModel> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.IdApolice);
+            builder.Property(x => x.CPFCliente).IsRequired().HasMaxLength(12);
+            builder.Property(x => x.Status).IsRequired();   
         }
     }
 }

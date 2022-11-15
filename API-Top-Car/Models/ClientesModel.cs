@@ -1,4 +1,6 @@
-﻿namespace API_Top_Car.Models
+﻿using API_Top_Car.Enums;
+
+namespace API_Top_Car.Models
 {
     public class ClientesModel
     {
@@ -9,5 +11,6 @@
         public string Rua { get; set; }
         public string Bairro { get; set; }
         public string Nome { get; set; }
-    }
+        public StatusCliente statusCliente { get; set; }
+    }   
 }

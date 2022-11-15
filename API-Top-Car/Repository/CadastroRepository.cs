@@ -12,29 +12,54 @@ namespace API_Top_Car.Repository
         {
             _dbContext = sistemasSegurosDBContext;
         }
-        public Task<List<CadastrosModel>> AdicionarCadastros(CadastrosModel cadastros)
+        public async Task<CadastrosModel> AdicionarCadastros(CadastrosModel cadastros)
         {
-            throw new NotImplementedException();
+            await _dbContext.Cadastros.AddAsync(cadastros);
+            await _dbContext.SaveChangesAsync();
+
+            return cadastros;
         }
 
-        public Task<bool> Apagar(int idCadastros)
+        public async Task<bool> ApagarCadastro(int idCadastros)
         {
-            throw new NotImplementedException();
+            CadastrosModel cadastrosPorId = await BuscarCadastroPorId(idCadastros);
+
+            if (cadastrosPorId == null)
+            {
+                throw new Exception($" O Cadastro:{idCadastros} não foi encontrado.");
+            }
+
+            _dbContext.Cadastros.Remove(cadastrosPorId);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
-        public Task<List<CadastrosModel>> AtualizarCadastros(CadastrosModel cadastros, int idCadastros)
+        public async Task<CadastrosModel> AtualizarCadastros(CadastrosModel cadastros, int idCadastros)
         {
-            throw new NotImplementedException();
+            CadastrosModel cadastrosPorId = await BuscarCadastroPorId(idCadastros);
+
+            if(cadastrosPorId == null)
+            {
+                throw new Exception($"Atualização de Cadastro:{idCadastros} não concluida.");
+            }
+            cadastrosPorId.CPF = cadastros.CPF;
+            cadastrosPorId.CNPJ = cadastros.CNPJ;
+
+            _dbContext.Cadastros.Update(cadastrosPorId);
+            await _dbContext.SaveChangesAsync();
+
+            return cadastrosPorId;
         }
 
-        public async Task<List<CadastrosModel>> BuscarCadastroPorId(int idCadastros)
+        public async Task<CadastrosModel> BuscarCadastroPorId(int idCadastros)
         {
             return await _dbContext.Cadastros.FirstOrDefaultAsync(x => x.IdCadastro == idCadastros);
         }
 
-        public Task<List<CadastrosModel>> BuscarTodosCadastros()
+        public async Task<List<CadastrosModel>> BuscarTodosCadastros()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Cadastros.ToListAsync();
         }
     }
 }

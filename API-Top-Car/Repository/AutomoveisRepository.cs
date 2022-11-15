@@ -7,30 +7,30 @@ namespace API_Top_Car.Repository
 {
     public class AutomoveisRepository : IAutomoveisRepository
     {
-        private readonly SistemasSegurosDBContext _dbContext;
+        private readonly SistemasSegurosDBContext _dbContextAutoMoveis;
         public AutomoveisRepository(SistemasSegurosDBContext sistemasSegurosDBContext)
         {
-            _dbContext = sistemasSegurosDBContext;
+            _dbContextAutoMoveis = sistemasSegurosDBContext;
         }
 
-        public async Task<List<AutomoveisModel>> BuscarAutomoveisPorId(int idVeiculo)
+        public async Task<AutomoveisModel> BuscarAutomoveisPorId(int idVeiculo)
         {
-            return await _dbContext.Automoveis.FirstOrDefaultAsync(x => x.IdVeiculo == idVeiculo);
+            return await _dbContextAutoMoveis.Automoveis.FirstOrDefaultAsync(x => x.IdVeiculo == idVeiculo);
         }
 
         public async Task<List<AutomoveisModel>> BuscarTodosAutomoveis()
         {
-            return await _dbContext.Automoveis.ToListAsync();
+            return await _dbContextAutoMoveis.Automoveis.ToListAsync();
         }
-        public async Task<List<AutomoveisModel>> AdicionarAutoMoveis(AutomoveisModel automoveis)
+        public async Task<AutomoveisModel> AdicionarAutoMoveis(AutomoveisModel automoveis)
         {
 
-            await _dbContext.Automoveis.AddAsync(automoveis);
-            await _dbContext.SaveChangesAsync();
+            await _dbContextAutoMoveis.Automoveis.AddAsync(automoveis);
+            await _dbContextAutoMoveis.SaveChangesAsync();
 
             return automoveis;
         }
-        public async Task<List<AutomoveisModel>> AtualizarAutoMoveis(AutomoveisModel automoveis, int idVeiculo)
+        public async Task<AutomoveisModel> AtualizarAutoMoveis(AutomoveisModel automoveis, int idVeiculo)
         {
             AutomoveisModel automoveisPorId = await BuscarAutomoveisPorId(idVeiculo);
 
@@ -46,13 +46,13 @@ namespace API_Top_Car.Repository
             automoveisPorId.ModeloVeiculo = automoveis.ModeloVeiculo;
             automoveisPorId.Vin = automoveis.Vin;
 
-            _dbContext.Automoveis.Update(automoveisPorId);
-            await _dbContext.SaveChangesAsync();
+            _dbContextAutoMoveis.Automoveis.Update(automoveisPorId);
+            await _dbContextAutoMoveis.SaveChangesAsync();
 
             return automoveisPorId;
         }
 
-        public async Task<bool> Apagar( int idVeiculo)
+        public async Task<bool> ApagarAutoMoveis( int idVeiculo)
         {
             AutomoveisModel automoveisPorId = await BuscarAutomoveisPorId(idVeiculo);
 
@@ -61,8 +61,8 @@ namespace API_Top_Car.Repository
                 throw new Exception($"Automovel para o ID: {idVeiculo} não foi encontrado.");
             }
 
-            _dbContext.Automoveis.Remove(automoveisPorId);
-            await _dbContext.SaveChangesAsync();
+            _dbContextAutoMoveis.Automoveis.Remove(automoveisPorId);
+            await _dbContextAutoMoveis.SaveChangesAsync();
 
             return true;
         }

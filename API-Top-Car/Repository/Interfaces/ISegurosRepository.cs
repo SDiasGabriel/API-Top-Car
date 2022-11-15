@@ -5,9 +5,9 @@ namespace API_Top_Car.Repository.Interfaces
     public interface ISegurosRepository
     {
         Task<List<SegurosModel>> BuscarTodosSeguros();
-        Task<List<SegurosModel>> BuscarSegurosPorCodigo(int codigo);
-        Task<List<SegurosModel>> AdicionarSeguros(SegurosModel clientes);
-        Task<List<SegurosModel>> AtualizarSeguros(SegurosModel clientes, int codigo);
-        Task<bool> Apagar(int codigo);
+        Task<SegurosModel> BuscarSegurosPorCodigo(int codigoID);
+        Task<SegurosModel> AdicionarSeguros(SegurosModel seguros);
+        Task<SegurosModel> AtualizarSeguros(SegurosModel seguros, int codigoID);
+        Task<bool> ApagarSeguro(int codigoID);
     }
 }
